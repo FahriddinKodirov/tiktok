@@ -28,6 +28,8 @@
 //   static const addCategoriesPage = '/addCategoriesPage';
 //   static const searchPage = '/searchPage';
 //   static const productPage = '/productPage';
+  
+
 // }
 
 // class AppRoutes {

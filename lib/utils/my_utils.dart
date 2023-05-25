@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class MyUtils {
@@ -78,11 +77,49 @@ searchHeaderPage(
             isTrue = !isTrue;
           },
           child:
-              isTrue ? SvgPicture.asset(iconOne) : SvgPicture.asset(iconTwo)),
+              isTrue ? Icon(Icons.devices_fold_sharp) : Icon(Icons.devices_fold_sharp)),
     ],
   );
 }
 
+gridWiew({
+  required var categoryLenth,
+  required var height,
+  required var width,
+  required var count,
+  required var extent,
+  required var search,
+}) {
+  return SizedBox(
+      height: height,
+      width: width,
+      child: GridView.builder(
+          itemCount: categoryLenth,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: count,
+              mainAxisSpacing: 14,
+              crossAxisSpacing: 20,
+              mainAxisExtent: extent),
+          itemBuilder: ((context, index) {
+            return Dismissible(
+                behavior: HitTestBehavior.translucent,
+                direction: DismissDirection.endToStart,
+                key: Key(index.toString()),
+                background: Container(
+                  decoration: BoxDecoration(
+                      color: const Color(0xfffbd1d8),
+                      borderRadius: BorderRadius.circular(20)),
+                  alignment: Alignment.centerRight,
+                  padding: EdgeInsets.only(right: width * 0.1),
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                    size: 32,
+                  ),
+                ),
+                child: search);
+          })));
+}
 
 notFounPage(
     {context, required String wordLineOne, required String wordLineTwo}) {
@@ -136,6 +173,16 @@ check(context,
       ],
     ),
   );
+}
+
+class MyIndicator {
+  static List<double> indexThree = [14, 38, 60];
+
+  static List<double> indexTwo = [38, 60, 38];
+
+  static List<double> indexOne = [60, 14, 14];
+
+  static List indexIndecator = [indexOne, indexTwo, indexThree];
 }
 
 height(context) => MediaQuery.of(context).size.height;
@@ -194,3 +241,23 @@ bigFavorite(context,isTrue) {
 }
 
 
+profileGetInputDecoration(context, {required String label}) {
+  return InputDecoration(
+    contentPadding: EdgeInsets.only(left: width(context) * 0.06),
+    hintText: label,
+    prefixIcon: Icon(Icons.search,color: Colors.black,),
+    border: InputBorder.none,
+    filled: true,
+    fillColor: Colors.grey[200],
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(width(context)),
+      borderSide: const BorderSide(
+        color: Color(0xFFA5A9B6),
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(width(context)),
+      borderSide: const BorderSide(color: Color(0xFF333743)),
+    ),
+  );
+}
